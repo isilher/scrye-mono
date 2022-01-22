@@ -1,8 +1,9 @@
 import { StatusBar } from "expo-status-bar"
 import React, { useEffect, useState } from "react"
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, Text, View, KeyboardAvoidingView } from "react-native"
 import { BleManager, State } from "react-native-ble-plx"
 import { Bridge } from "./src/components"
+import { ScreenWrapper } from "./src/components/ScreenWrapper"
 
 export const bleManager = new BleManager()
 
@@ -17,15 +18,17 @@ export default function App() {
   }, [])
 
   return (
-    <View style={styles.container}>
-      <Text style={{ fontSize: 72 }}>🧐</Text>
-      <Text style={{ fontSize: 32 }}>SCRYE mono</Text>
-      <Text>BLE {bleState}</Text>
+    <ScreenWrapper>
+      <View style={styles.container}>
+        <Text style={{ fontSize: 72 }}>🧐</Text>
+        <Text style={{ fontSize: 32 }}>SCRYE mono</Text>
+        <Text>BLE {bleState}</Text>
 
-      {bleState === State.PoweredOn && <Bridge bleManager={bleManager} />}
+        {bleState === State.PoweredOn && <Bridge bleManager={bleManager} />}
 
-      <StatusBar style="auto" />
-    </View>
+        <StatusBar style="auto" />
+      </View>
+    </ScreenWrapper>
   )
 }
 
